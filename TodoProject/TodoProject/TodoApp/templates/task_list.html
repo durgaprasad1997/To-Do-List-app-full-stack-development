@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of cards</title>
+    <style>
+        table {
+
+        align:center;
+         width: 90%;
+         margin-left:50px;
+        }
+        #logout,#w
+        {
+        color:blue;
+        }
+        th
+        {
+
+        align:center;
+           height: 70px;
+        color:DarkSlateBlue;
+         font-family: Verdana;
+         font-size:25px;
+
+        }
+        td
+        {
+        height:70px;
+        align:center;
+        color:green;
+        font-family: Verdana;
+         font-size:20px;
+        }
+        #a
+        {
+            align:center;
+             color:LightCoral;
+        }
+        #c
+        {
+        color:black;
+        }
+        #header
+        {
+        padding-top:20px;
+      background-color:pink ;
+        }
+
+        body
+        {
+        border: 20px solid blue;
+        margin:0px;
+        }
+        #border
+        {
+        background-color:white;
+        }
+    </style>
+</head>
+<body style="background-color:yellow">
+<div id="header">
+<h1 id="w" align="right"> Welcome {{ user.username }}</h1>
+<h3 id="logout" align="right"><a href="{% url 'logout' %}">Logout</a></h3>
+</div>
+<div id="border">
+<h2 align="center" id="c">
+   List of Cards
+</h2>
+
+    <h4 id="a" align="center"><a href="{% url 'addtask' user.id %}">Create New Card</a></h4>
+    <table  border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End date</th>
+            <th>Description</th>
+        </tr>
+        {% for res in tasks %}
+        <tr>
+            <td>{{res.id}}</td>
+            <td>{{res.name}}</td>
+            <td>{{res.type}}</td>
+            <td>{{res.start_date}}</td>
+            <td>{{res.end_date}}</td>
+            <td>{{res.description}}</td>
+            <td><a href="{% url 'deletetask' res.id %}">delete</a></td>
+        <td><a href="{% url 'updatetask' res.id %}">edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
